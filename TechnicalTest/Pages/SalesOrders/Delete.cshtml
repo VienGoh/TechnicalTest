@@ -1,0 +1,64 @@
+﻿@page
+@model TechnicalTest.Pages.SalesOrders.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Sales Order";
+}
+
+<h1 class="text-danger">Delete Sales Order</h1>
+
+<h4>Are you sure you want to delete this record?</h4>
+<hr />
+<div class="card border-danger shadow-sm">
+    <div class="card-header bg-danger text-white">
+        <strong>Sales Order Details</strong>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-4">
+                Sales Order No
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SalesOrder.SalesOrderNo)
+            </dd>
+            <dt class="col-sm-4">
+                Customer Name
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SalesOrder.CustomerName)
+            </dd>
+            <dt class="col-sm-4">
+                Order Date
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SalesOrder.OrderDate)
+            </dd>
+            <dt class="col-sm-4">
+                Total Amount
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SalesOrder.TotalAmount)
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer text-end">
+        <form method="post" onsubmit="return confirmDelete();">
+            <input type="hidden" asp-for="SalesOrder.Id" />
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Delete
+            </button>
+            <a asp-page="./Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Konfirmasi Aksi Hapus -->
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this sales order?");
+        }
+    </script>
+}

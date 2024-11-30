@@ -1,0 +1,84 @@
+﻿@page
+@model TechnicalTest.Pages.SalesOrders.CreateModel
+
+@{
+    ViewData["Title"] = "Create Sales Order";
+}
+
+<h1>Create Sales Order</h1>
+
+<h4>Fill in the details below:</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form method="post" id="createForm">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <!-- Sales Order No (Auto-generated) -->
+            <div class="mb-3">
+                <label class="form-label">Sales Order No</label>
+                <input id="SalesOrderNo" class="form-control" value="@Model.SalesOrder.SalesOrderNo" readonly />
+                <span asp-validation-for="SalesOrder.SalesOrderNo" class="text-danger"></span>
+            </div>
+
+            <!-- Customer Name -->
+            <div class="mb-3">
+                <label asp-for="SalesOrder.CustomerName" class="form-label"></label>
+                <input asp-for="SalesOrder.CustomerName" class="form-control" placeholder="Enter customer name" />
+                <span asp-validation-for="SalesOrder.CustomerName" class="text-danger"></span>
+            </div>
+
+            <!-- Order Date -->
+            <div class="mb-3">
+                <label asp-for="SalesOrder.OrderDate" class="form-label"></label>
+                <input asp-for="SalesOrder.OrderDate" type="date" class="form-control" />
+                <span asp-validation-for="SalesOrder.OrderDate" class="text-danger"></span>
+            </div>
+
+            <!-- Total Amount -->
+            <div class="mb-3">
+                <label asp-for="SalesOrder.TotalAmount" class="form-label"></label>
+                <input asp-for="SalesOrder.TotalAmount" type="number" class="form-control" placeholder="Enter total amount" />
+                <span asp-validation-for="SalesOrder.TotalAmount" class="text-danger"></span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Validation Script -->
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <!-- Auto-generate Sales Order No -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            generateSalesOrderNo();
+        });
+
+        function generateSalesOrderNo() {
+            const date = new Date();
+            const day = ("0" + date.getDate()).slice(-2);
+            const month = ("0" + (date.getMonth() + 1)).slice(-2);
+            const year = date.getFullYear().toString().slice(-2);
+
+            // Simulate getting number of existing records for Sales Order
+            const existingSalesOrders = @Model.ExistingSalesOrdersCount; // Pass from backend
+
+            const number = String(existingSalesOrders + 1).padStart(3, '0'); // Ensure 3 digits (001, 002, etc.)
+
+            const salesOrderNo = `SO-${day}${month}${year}${number}`;
+            document.getElementById("SalesOrderNo").value = salesOrderNo;
+        }
+    </script>
+}
+
+

@@ -1,0 +1,59 @@
+﻿@page
+@model TechnicalTest.Pages.SalesOrders.EditModel
+
+@{
+    ViewData["Title"] = "Edit Sales Order";
+}
+
+<h1>Edit Sales Order</h1>
+
+<h4>Update the details below:</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <!-- Sales Order No (Readonly) -->
+            <div class="form-group mb-3">
+                <label class="form-label">Sales Order No</label>
+                <input asp-for="SalesOrder.SalesOrderNo" class="form-control" readonly />
+                <span asp-validation-for="SalesOrder.SalesOrderNo" class="text-danger"></span>
+            </div>
+
+            <!-- Customer Name -->
+            <div class="form-group mb-3">
+                <label asp-for="SalesOrder.CustomerName" class="form-label"> Customer Name </label>
+                <input asp-for="SalesOrder.CustomerName" class="form-control" placeholder="Enter customer name" />
+                <span asp-validation-for="SalesOrder.CustomerName" class="text-danger"></span>
+            </div>
+
+            <!-- Order Date -->
+            <div class="form-group mb-3">
+                <label asp-for="SalesOrder.OrderDate" class="form-label"></label>
+                <input asp-for="SalesOrder.OrderDate" class="form-control" type="date" />
+                <span asp-validation-for="SalesOrder.OrderDate" class="text-danger"></span>
+            </div>
+
+            <!-- Total Amount -->
+            <div class="form-group mb-3">
+                <label asp-for="SalesOrder.TotalAmount" class="form-label"></label>
+                <input asp-for="SalesOrder.TotalAmount" class="form-control" type="number" step="0.01" min="0" placeholder="Enter total amount" />
+                <span asp-validation-for="SalesOrder.TotalAmount" class="text-danger"></span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mb-3">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,50 @@
+﻿@page
+@model TechnicalTest.Pages.SalesOrders.DetailsModel
+
+@{
+    ViewData["Title"] = "Sales Order Details";
+}
+
+<h1 class="text-primary">Sales Order Details</h1>
+
+<div class="card shadow-sm mt-4">
+    <div class="card-header bg-primary text-white">
+        <strong>Sales Order Information</strong>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-4">
+                Sales Order No
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SalesOrder.SalesOrderNo)
+            </dd>
+            <dt class="col-sm-4">
+                Customer Name
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SalesOrder.CustomerName)
+            </dd>
+            <dt class="col-sm-4">
+                Order Date
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SalesOrder.OrderDate)
+            </dd>
+            <dt class="col-sm-4">
+                Total Amount
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SalesOrder.TotalAmount)
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer text-end">
+        <a asp-page="./Edit" asp-route-id="@Model.SalesOrder?.Id" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+        <a asp-page="./Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
+</div>
