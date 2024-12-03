@@ -1,5 +1,5 @@
 sebelum menjalankan code 
-hapus file yang ada dalam folder migration
+hapus file yang ada dalam folder Migrations
 kemudian
 pada package manage console
 run 2 koding dibawah
